@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="FashFans.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:FashFans.Converters">
+
+    <Application.Resources>
+        <!--  COLORS  -->
+        <Color x:Key="WhiteColor">#ffffff</Color>
+        <Color x:Key="BlackColor">#000000</Color>
+        <Color x:Key="ErrorColor">#ff5252</Color>
+        <Color x:Key="UltraLightGrayColor">#f8f8f8</Color>
+        <Color x:Key="ExtraGrayColor">#999999</Color>
+        <Color x:Key="LightGrayColor">#f5f5f5</Color>
+
+        <!--  FORMATTED STRINGS  -->
+        <x:String x:Key="FormattedDate">{0:dd.MM.yyyy}</x:String>
+
+        <!--  FONTS  -->
+        <OnPlatform
+            x:Key="SFProLight"
+            x:TypeArguments="x:String"
+            Android="SFProDisplay-Light.ttf#SF Pro Display light"
+            iOS="SFProDisplay-Light" />
+        <OnPlatform
+            x:Key="SFProRegular"
+            x:TypeArguments="x:String"
+            Android="SFProDisplay-Regular.ttf#SF Pro Display Regular"
+            iOS="SFProDisplay-Regular" />
+        <OnPlatform
+            x:Key="SFProSemiBold"
+            x:TypeArguments="x:String"
+            Android="SFProDisplay-SemiBold.ttf#SF Pro Display SemiBold"
+            iOS="SFProDisplay-SemiBold" />
+        <OnPlatform
+            x:Key="SFProThin"
+            x:TypeArguments="x:String"
+            Android="SFProDisplay-Thin.ttf#SF Pro Display Thin"
+            iOS="SFProDisplay-Thin" />
+
+        <!--  FONT SIZES  -->
+        <OnPlatform
+            x:Key="BaseFontSize"
+            x:TypeArguments="x:Double"
+            Android="15"
+            Default="15"
+            iOS="16" />
+
+        <OnPlatform
+            x:Key="UltraLittleSize"
+            x:TypeArguments="x:Double"
+            Android="9"
+            Default="10"
+            iOS="8" />
+
+        <OnPlatform
+            x:Key="ExtraLittleSize"
+            x:TypeArguments="x:Double"
+            Android="10"
+            Default="10"
+            iOS="10" />
+
+        <OnPlatform
+            x:Key="LittleSize"
+            x:TypeArguments="x:Double"
+            Android="12"
+            Default="12"
+            iOS="11" />
+
+        <OnPlatform
+            x:Key="MidMediumSize"
+            x:TypeArguments="x:Double"
+            Android="14"
+            Default="14"
+            iOS="12" />
+
+        <OnPlatform
+            x:Key="SoftMediumSize"
+            x:TypeArguments="x:Double"
+            Android="13"
+            Default="14"
+            iOS="13" />
+
+        <OnPlatform
+            x:Key="MediumSize"
+            x:TypeArguments="x:Double"
+            Android="15"
+            Default="14"
+            iOS="14" />
+
+        <OnPlatform
+            x:Key="LargeSize"
+            x:TypeArguments="x:Double"
+            Android="18"
+            Default="16"
+            iOS="16" />
+
+        <OnPlatform
+            x:Key="LargerSize"
+            x:TypeArguments="x:Double"
+            Android="20"
+            Default="18"
+            iOS="18" />
+
+        <OnPlatform
+            x:Key="BigSize"
+            x:TypeArguments="x:Double"
+            Android="24"
+            Default="18"
+            iOS="20" />
+
+        <OnPlatform
+            x:Key="ExtraBigSize"
+            x:TypeArguments="x:Double"
+            Android="32"
+            Default="24"
+            iOS="24" />
+
+        <OnPlatform
+            x:Key="HugeSize"
+            x:TypeArguments="x:Double"
+            Android="48"
+            Default="48"
+            iOS="32" />
+
+        <OnPlatform
+            x:Key="BaseButtonFontAttributes"
+            x:TypeArguments="FontAttributes"
+            Android="None"
+            iOS="Bold" />
+
+        <!--  CONVERTERS  -->
+        <converters:BoolToGenericObjectConverter
+            x:Key="Reverse_bool_converter"
+            x:TypeArguments="x:Boolean"
+            FalseObject="True"
+            TrueObject="False" />
+
+        <!--  DATA TEMPLATES  -->
+
+        <!--  EXPLICIT STYLES  -->
+        <Style x:Key="ValidationErrorLabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="TextColor" Value="{StaticResource ErrorColor}" />
+            <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+        </Style>
+
+        <!--  IMPLICIT STYLES  -->
+        <Style
+            ApplyToDerivedTypes="True"
+            CanCascade="True"
+            TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource SFProLight}" />
+        </Style>
+
+    </Application.Resources>
+</Application>

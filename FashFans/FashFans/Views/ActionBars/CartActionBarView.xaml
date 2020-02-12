@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<actionbars:ActionBarBaseView
+    x:Class="FashFans.Views.ActionBars.CartActionBarView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:actionbars="clr-namespace:FashFans.Controls.ActionBars"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
+
+
+    <Grid
+        BackgroundColor="{StaticResource WhiteColor}"
+        HeightRequest="55"
+        RowSpacing="0">
+        <BoxView
+            HeightRequest="1"
+            VerticalOptions="End"
+            Color="{StaticResource LightGrayColor}" />
+
+        <!--  LOGO  -->
+        <ContentView Padding="20,0" VerticalOptions="Fill">
+            <Label
+                FontSize="28"
+                HorizontalOptions="Center"
+                Text="My cart"
+                TextColor="{StaticResource LightGrayColor}"
+                VerticalOptions="Center" />
+        </ContentView>
+
+        <!--  LEFT BUTTON  -->
+        <ContentView
+            Padding="20,0"
+            HorizontalOptions="Start"
+            IsVisible="{Binding IsBackButtonAvailable}"
+            VerticalOptions="Fill">
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CloseModalCommand}" />
+            </ContentView.GestureRecognizers>
+            <ffimageloadingsvg:SvgCachedImage
+                HeightRequest="22"
+                HorizontalOptions="Center"
+                Source="resource://FashFans.Resources.Images.Close.svg"
+                VerticalOptions="Center" />
+        </ContentView>
+
+        <!--  RIGHT BUTTON  -->
+
+    </Grid>
+</actionbars:ActionBarBaseView>

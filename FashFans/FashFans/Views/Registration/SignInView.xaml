@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<viewBase:ContentPageBaseView
+    x:Class="FashFans.Views.Registration.SignInView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:FashFans.Behaviors"
+    xmlns:controls="clr-namespace:FashFans.Controls"
+    xmlns:dependency="clr-namespace:FashFans.ViewModels.Base"
+    xmlns:extensions="clr-namespace:FashFans.Extensions"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:viewBase="clr-namespace:FashFans.Views.Base"
+    dependency:DependencyLocator.AutoWireViewModel="True"
+    ios:Page.UseSafeArea="False">
+
+    <viewBase:ContentPageBaseView.MainContent>
+        <Grid BackgroundColor="Transparent">
+            <ffimageloadingsvg:SvgCachedImage Aspect="AspectFill" Source="resource://FashFans.Resources.Images.im_background_signin.png" />
+            <controls:GradientBackground
+                EndColor="#FA4A6F"
+                MiddleColor="#EA6362"
+                Opacity="0.9"
+                StartColor="#FFA7E7" />
+
+            <Grid
+                Grid.Row="0"
+                Margin="0,60"
+                RowSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    FontFamily="{StaticResource SFProSemiBold}"
+                    FontSize="36"
+                    HorizontalOptions="Center"
+                    Text="Login"
+                    TextColor="{StaticResource WhiteColor}"
+                    VerticalOptions="End" />
+
+                <controls:ExtendedContentView
+                    Grid.Row="1"
+                    Margin="20,0"
+                    BackgroundColor="Transparent"
+                    BorderColor="{StaticResource WhiteColor}"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    HeightRequest="45">
+                    <controls:EntryExtended
+                        Margin="20,0"
+                        BackgroundColor="Transparent"
+                        BorderColor="{StaticResource WhiteColor}"
+                        BorderRadius="10"
+                        BorderWidth="1"
+                        FontFamily="{StaticResource SFProLight}"
+                        FontSize="{StaticResource MediumSize}"
+                        HorizontalOptions="Fill"
+                        Placeholder="Email address"
+                        PlaceholderColor="{StaticResource WhiteColor}"
+                        ReturnType="Done"
+                        Text="{Binding Email}"
+                        TextColor="{StaticResource WhiteColor}" />
+                </controls:ExtendedContentView>
+
+
+                <controls:ExtendedContentView
+                    Grid.Row="2"
+                    Margin="20,0"
+                    BackgroundColor="Transparent"
+                    BorderColor="{StaticResource WhiteColor}"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    HeightRequest="45">
+                    <controls:EntryExtended
+                        Margin="20,0"
+                        BackgroundColor="Transparent"
+                        BorderColor="{StaticResource WhiteColor}"
+                        BorderRadius="10"
+                        BorderWidth="1"
+                        FontFamily="{StaticResource SFProLight}"
+                        FontSize="{StaticResource MediumSize}"
+                        HorizontalOptions="Fill"
+                        IsPassword="True"
+                        Placeholder="Password"
+                        PlaceholderColor="{StaticResource WhiteColor}"
+                        ReturnType="Done"
+                        Text="{Binding Password}"
+                        TextColor="White" />
+                </controls:ExtendedContentView>
+
+                <StackLayout
+                    Grid.Row="3"
+                    Margin="20,10"
+                    Orientation="Horizontal">
+                    <Switch
+                        HorizontalOptions="Start"
+                        IsToggled="{Binding IsRemember}"
+                        OnColor="{StaticResource WhiteColor}" />
+
+                    <Label
+                        Grid.Row="6"
+                        Margin="10,0,0,0"
+                        HorizontalOptions="Center"
+                        Text="REMEMBER ME?"
+                        TextColor="{StaticResource WhiteColor}"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <Button
+                    Grid.Row="4"
+                    Margin="20,0,20,60"
+                    Padding="0,10"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    Command="{Binding SignInCommand}"
+                    CornerRadius="10"
+                    HeightRequest="45"
+                    Text="Let's dive in"
+                    TextColor="{StaticResource BlackColor}" />
+
+                <BoxView
+                    Grid.Row="5"
+                    Margin="20,0"
+                    HeightRequest="1"
+                    VerticalOptions="Center"
+                    Color="{StaticResource WhiteColor}" />
+
+                <Label
+                    Grid.Row="6"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                Text="FORGOT PASSWORD"
+                                TextColor="{StaticResource WhiteColor}"
+                                TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ForgotCommand}" NumberOfTapsRequired="1" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+            <!--  ACTION BAR  -->
+            <Grid
+                Grid.Row="0"
+                Margin="0,40,0,0"
+                HeightRequest="60"
+                RowSpacing="10"
+                VerticalOptions="Start"
+                WidthRequest="60">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" NumberOfTapsRequired="1" />
+                </Grid.GestureRecognizers>
+
+                <ffimageloadingsvg:SvgCachedImage
+                    Margin="20,0,0,0"
+                    CacheType="Memory"
+                    HeightRequest="30"
+                    HorizontalOptions="Start"
+                    Source="resource://FashFans.Resources.Images.ic_arrow_back.svg"
+                    VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+    </viewBase:ContentPageBaseView.MainContent>
+</viewBase:ContentPageBaseView>

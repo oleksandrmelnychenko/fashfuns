@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="FashFans.Views.BottomTabs.Home.DesignersContentView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:FashFans.Behaviors"
+    xmlns:dependency="clr-namespace:FashFans.ViewModels.Base"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:rate="clr-namespace:SkiaRate;assembly=SkiaRate.Forms"
+    dependency:DependencyLocator.AutoWireViewModel="True">
+
+    <ScrollView Margin="0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="500" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Margin="20,0,0,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontFamily="{StaticResource SFProRegular}"
+                            FontSize="{StaticResource HugeSize}"
+                            Text="Designers on the&#x0a;spotlight&#x0a;"
+                            TextColor="{StaticResource BlackColor}" />
+                        <Span
+                            FontSize="{StaticResource MediumSize}"
+                            Text="&#x0a;"
+                            TextColor="{StaticResource BlackColor}" />
+                        <Span
+                            FontSize="{StaticResource MediumSize}"
+                            Text="Be inspired, Be connected, Be part of the creation process."
+                            TextColor="{StaticResource BlackColor}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <CollectionView
+                Grid.Row="1"
+                ItemsSource="{Binding Designers}"
+                SelectionMode="Single">
+                <CollectionView.Behaviors>
+                    <behaviors:EventToCommandBehavior Command="{Binding SelectedCommand}" EventName="SelectionChanged" />
+                </CollectionView.Behaviors>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60" />
+                                <RowDefinition Height="200" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid
+                                Grid.Row="0"
+                                Margin="5,0"
+                                BackgroundColor="{StaticResource WhiteColor}">
+                                <ffimageloadingsvg:SvgCachedImage
+                                    Margin="20,0,0,0"
+                                    Aspect="AspectFit"
+                                    CacheType="Memory"
+                                    HeightRequest="50"
+                                    HorizontalOptions="Start"
+                                    Source="{Binding ImageAvatarUrl}"
+                                    WidthRequest="50" />
+
+                                <Label
+                                    Margin="80,0,0,0"
+                                    FontSize="{StaticResource MediumSize}"
+                                    Text="{Binding DesignerName}"
+                                    TextColor="{StaticResource BlackColor}"
+                                    VerticalOptions="Center" />
+
+                                <Button
+                                    Padding="10,10"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="{StaticResource BlackColor}"
+                                    BorderWidth="1"
+                                    CornerRadius="5"
+                                    HeightRequest="25"
+                                    HorizontalOptions="Center"
+                                    Text="Follow"
+                                    TextColor="{StaticResource BlackColor}"
+                                    TranslationX="35"
+                                    VerticalOptions="Center" />
+
+                                <ContentView HorizontalOptions="End" WidthRequest="60">
+                                    <ffimageloadingsvg:SvgCachedImage
+                                        CacheType="Memory"
+                                        HorizontalOptions="Center"
+                                        Source="resource://FashFans.Resources.Images.ic_dots-menu.png"
+                                        WidthRequest="25" />
+                                </ContentView>
+                            </Grid>
+
+                            <ffimageloadingsvg:SvgCachedImage
+                                Grid.Row="1"
+                                Aspect="AspectFill"
+                                CacheType="Memory"
+                                HeightRequest="200"
+                                Source="{Binding ImgSource}" />
+
+                            <Grid Grid.Row="2">
+                                <StackLayout
+                                    Margin="20,0,0,0"
+                                    HorizontalOptions="Start"
+                                    Orientation="Horizontal">
+                                    <ffimageloadingsvg:SvgCachedImage
+                                        CacheType="Memory"
+                                        HorizontalOptions="Center"
+                                        Source="resource://FashFans.Resources.Images.im_heart.png"
+                                        WidthRequest="25" />
+                                    <Label
+                                        HorizontalOptions="Start"
+                                        Text="{Binding LikeCount}"
+                                        TextColor="{StaticResource BlackColor}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Text="likes"
+                                        TextColor="{StaticResource BlackColor}"
+                                        VerticalOptions="Center" />
+                                </StackLayout>
+
+                                <StackLayout
+                                    Margin="0,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Orientation="Horizontal">
+                                    <ffimageloadingsvg:SvgCachedImage
+                                        CacheType="Memory"
+                                        HorizontalOptions="Center"
+                                        Source="resource://FashFans.Resources.Images.im_message.png"
+                                        WidthRequest="25" />
+                                    <Label
+                                        HorizontalOptions="Center"
+                                        Text="{Binding CommentCount}"
+                                        TextColor="{StaticResource BlackColor}"
+                                        VerticalOptions="Center" />
+                                </StackLayout>
+
+                            </Grid>
+
+                            <Label
+                                Grid.Row="3"
+                                Margin="20,0,0,0"
+                                FontSize="{StaticResource LargeSize}"
+                                Text="{Binding DesignerName}"
+                                TextColor="{StaticResource BlackColor}"
+                                VerticalOptions="Center" />
+
+                            <Label
+                                Grid.Row="4"
+                                Margin="20,0,0,0"
+                                FontSize="{StaticResource MediumSize}"
+                                Text="{Binding Description}"
+                                TextColor="{StaticResource BlackColor}"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
+</ContentView>

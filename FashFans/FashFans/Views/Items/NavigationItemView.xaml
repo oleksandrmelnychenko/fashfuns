@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="FashFans.Views.Items.NavigationItemView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
+
+    <Grid Margin="5,10,5,0" RowSpacing="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70" />
+        </Grid.ColumnDefinitions>
+
+        <ffimageloadingsvg:SvgCachedImage
+            x:Name="_selectedImage"
+            CacheType="Memory"
+            HeightRequest="55"
+            HorizontalOptions="Center"
+            IsVisible="False"
+            Source="{Binding SelectedImgSource}"
+            VerticalOptions="Center"
+            WidthRequest="55" />
+        <ffimageloadingsvg:SvgCachedImage
+            x:Name="_icon_CachedImage"
+            CacheType="Memory"
+            HeightRequest="45"
+            HorizontalOptions="Center"
+            Source="{Binding ImgSource}"
+            VerticalOptions="Center"
+            WidthRequest="45" />
+
+        <Label
+            Grid.Row="1"
+            FontSize="{StaticResource LittleSize}"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            LineBreakMode="WordWrap"
+            Text="{Binding NavigationTypeName}"
+            TextColor="{StaticResource BlackColor}"
+            VerticalOptions="Center" />
+    </Grid>
+</ContentView>

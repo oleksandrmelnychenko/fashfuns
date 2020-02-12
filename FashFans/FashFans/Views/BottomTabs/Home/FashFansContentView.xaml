@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="FashFans.Views.BottomTabs.Home.FashFansContentView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:FashFans.Behaviors"
+    xmlns:dependency="clr-namespace:FashFans.ViewModels.Base"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:rate="clr-namespace:SkiaRate;assembly=SkiaRate.Forms"
+    dependency:DependencyLocator.AutoWireViewModel="True">
+
+    <ScrollView Grid.Row="1" Margin="20,0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="650" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontFamily="{StaticResource SFProRegular}"
+                            FontSize="{StaticResource HugeSize}"
+                            Text="Popular items From&#x0a;"
+                            TextColor="{StaticResource BlackColor}" />
+                        <Span
+                            FontFamily="{StaticResource SFProRegular}"
+                            FontSize="{StaticResource HugeSize}"
+                            Text="Top Sellers&#x0a;"
+                            TextColor="{StaticResource BlackColor}" />
+                        <Span
+                            FontSize="{StaticResource MediumSize}"
+                            Text="&#x0a;"
+                            TextColor="{StaticResource BlackColor}" />
+                        <Span
+                            FontSize="{StaticResource MediumSize}"
+                            Text="Find the best popular items from top sellers which are right for you."
+                            TextColor="{StaticResource BlackColor}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <CollectionView
+                Grid.Row="1"
+                ItemsSource="{Binding Products}"
+                SelectionMode="Single">
+                <CollectionView.Behaviors>
+                    <behaviors:EventToCommandBehavior Command="{Binding SelectedCommand}" EventName="SelectionChanged" />
+                </CollectionView.Behaviors>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="200" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <ffimageloadingsvg:SvgCachedImage
+                                CacheType="Memory"
+                                HeightRequest="200"
+                                Source="{Binding ImgSource}" />
+                            <Label
+                                Grid.Row="1"
+                                Text="{Binding DesignerName}"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Row="2"
+                                FontFamily="{StaticResource SFProSemiBold}"
+                                Text="{Binding CategoryType}"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Row="3"
+                                Text="{Binding Price, StringFormat='${0}'}"
+                                VerticalOptions="Center" />
+                            <rate:RatingView
+                                Grid.Row="4"
+                                ColorOn="#FA4A6F"
+                                Count="5"
+                                HeightRequest="15"
+                                Value="{Binding Rate}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <ContentView Grid.Row="2">
+                <Grid>
+                    <ffimageloadingsvg:SvgCachedImage
+                        CacheType="Memory"
+                        HeightRequest="50"
+                        Source="resource://FashFans.Resources.Images.im_button.png" />
+                    <Label
+                        FontSize="{StaticResource LargeSize}"
+                        HorizontalOptions="Center"
+                        Text="Show all items"
+                        TextColor="{StaticResource WhiteColor}"
+                        VerticalOptions="Center" />
+                </Grid>
+            </ContentView>
+        </Grid>
+    </ScrollView>
+</ContentView>
