@@ -52,7 +52,8 @@ namespace FashFans.Services.Identity {
                 }
                 catch (Exception ex) {
                     Debug.WriteLine($"ERROR:{ex.Message}");
-                    Debugger.Break();
+                    //Debugger.Break();
+                    isSuccess = false;
                 }
 
                 return isSuccess;

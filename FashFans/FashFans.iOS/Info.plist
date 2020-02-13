@@ -1,68 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>UIDeviceFamily</key>
-	<array>
-		<integer>1</integer>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Drive need access to your photo library to upload user photo.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Drive need access to your photo library to upload user photo.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This app needs access to the camera to take photos.</string>
-	<key>NSContactsUsageDescription</key>
-	<string>Some ad content may access contact use</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>This app needs access to microphone.</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Needs Calendar Permission</string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Some ad content may access media library use</string>
-	<key>NSSiriUsageDescription</key>
-	<string>Some ad content may access siri use</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Your location is used to optimize news and searches.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Your location is used to optimize news and searches.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Your location is used to optimize news and searches.</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Fonts/SFProDisplay-Light.ttf</string>
-		<string>Fonts/SFProDisplay-Regular.ttf</string>
-		<string>Fonts/SFProDisplay-SemiBold.ttf</string>
-		<string>Fonts/SFProDisplay-Thin.ttf</string>
-	</array>
-	<key>MinimumOSVersion</key>
-	<string>8.0</string>
-	<key>CFBundleDisplayName</key>
-	<string>FashFans</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.nolt.fash</string>
-	<key>CFBundleVersion</key>
-	<string>1.01</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>CFBundleName</key>
-	<string>FashFans</string>
-	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/AppIcon.appiconset</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.01</string>
-</dict>
+  <dict>
+    <key>UIDeviceFamily</key>
+    <array>
+      <integer>1</integer>
+      <integer>2</integer>
+    </array>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Drive need access to your photo library to upload user photo.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Drive need access to your photo library to upload user photo.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>This app needs access to the camera to take photos.</string>
+    <key>NSContactsUsageDescription</key>
+    <string>Some ad content may access contact use</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app needs access to microphone.</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>Needs Calendar Permission</string>
+    <key>NSAppleMusicUsageDescription</key>
+    <string>Some ad content may access media library use</string>
+    <key>NSSiriUsageDescription</key>
+    <string>Some ad content may access siri use</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Your location is used to optimize news and searches.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Your location is used to optimize news and searches.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Your location is used to optimize news and searches.</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+    </dict>
+    <key>UIAppFonts</key>
+    <array>
+      <string>Fonts/SFProDisplay-Light.ttf</string>
+      <string>Fonts/SFProDisplay-Regular.ttf</string>
+      <string>Fonts/SFProDisplay-SemiBold.ttf</string>
+      <string>Fonts/SFProDisplay-Thin.ttf</string>
+    </array>
+    <key>MinimumOSVersion</key>
+    <string>8.0</string>
+    <key>CFBundleDisplayName</key>
+    <string>FashFans</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.nolt.fash</string>
+    <key>CFBundleVersion</key>
+    <string>1.01</string>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+    <key>CFBundleName</key>
+    <string>FashFans</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.01</string>
+    <key>XSAppIconAssets</key>
+    <string>Assets.xcassets/AppIcon.appiconset</string>
+  </dict>
 </plist>

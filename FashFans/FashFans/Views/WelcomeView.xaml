@@ -6,6 +6,7 @@
     xmlns:controls="clr-namespace:FashFans.Controls"
     xmlns:dependency="clr-namespace:FashFans.ViewModels.Base"
     xmlns:extensions="clr-namespace:FashFans.Extensions"
+    xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:viewBase="clr-namespace:FashFans.Views.Base"
@@ -14,7 +15,7 @@
 
     <viewBase:ContentPageBaseView.MainContent>
         <Grid BackgroundColor="Transparent">
-            <ffimageloadingsvg:SvgCachedImage Aspect="AspectFill" Source="resource://FashFans.Resources.Images.im_background_welcome.png" />
+            <ff:CachedImage Aspect="AspectFill" Source="resource://FashFans.Resources.Images.im_background_welcome.png" />
             <controls:GradientBackground
                 EndColor="#FA4A6F"
                 MiddleColor="#EA6362"
@@ -75,19 +76,6 @@
                     HeightRequest="45"
                     Text="Sign Up"
                     TextColor="{StaticResource BlackColor}" />
-
-                <!--<Button
-                    Grid.Row="2"
-                    Margin="20,0"
-                    Padding="0,15"
-                    BackgroundColor="Transparent"
-                    BorderColor="{StaticResource WhiteColor}"
-                    BorderWidth="1"
-                    CornerRadius="10"
-                    HeightRequest="45"
-                    Image="facebook.png"
-                    Text="Login with Facebook"
-                    TextColor="{StaticResource WhiteColor}" />-->
 
                 <StackLayout
                     Grid.Row="2"

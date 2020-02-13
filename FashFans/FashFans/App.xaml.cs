@@ -6,19 +6,13 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace FashFans {
     public partial class App : Application {
-
-        /// <summary>
-        ///     ctor().
-        /// </summary>
         public App() {
             InitializeComponent();
 
             InitApp();
         }
-
         private void InitApp() {
             DependencyLocator.RegisterDependencies();
         }
@@ -29,14 +23,12 @@ namespace FashFans {
         }
 
         protected override async void OnStart() {
-            base.OnSleep();
-
             await InitNavigation();
         }
 
         protected override void OnSleep() {
             base.OnSleep();
-            
+
             BaseSingleton<GlobalSetting>.Instance.SaveState();
 
             DependencyLocator.Resolve<INavigationService>().UnsubscribeAfterSleepApp();

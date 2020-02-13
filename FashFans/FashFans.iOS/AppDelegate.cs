@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Acr.UserDialogs;
 using FFImageLoading.Forms.Platform;
-using FFImageLoading.Svg.Forms;
 using Foundation;
 using ImageCircle.Forms.Plugin.iOS;
 using Sharpnado.Presentation.Forms.iOS;
@@ -24,7 +24,9 @@ namespace FashFans.iOS {
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options) {
             Forms.SetFlags("CollectionView_Experimental");
+
             global::Xamarin.Forms.Forms.Init();
+
             CachedImageRenderer.Init();
             SharpnadoInitializer.Initialize();
             ImageCircleRenderer.Init();
