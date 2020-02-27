@@ -1,4 +1,5 @@
 ﻿using FashFans.Helpers;
+using FashFans.Models.Args.PayPal;
 using FashFans.ViewModels.Base;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
@@ -52,6 +53,9 @@ namespace FashFans.Models.Identities {
         [DataMember]
         public bool IsAdministrator { get; internal set; }
 
+        [DataMember]
+        public PayPalTokenArgs PayPalTokenArgs { get; internal set; }
+
         /// <summary>
         /// Clear user profile.
         /// </summary>
@@ -65,6 +69,7 @@ namespace FashFans.Models.Identities {
             AvatarUrl = string.Empty;
             Id = default(long);
             IsAdministrator = default(bool);
+            PayPalTokenArgs = null;
         }
 
         internal void SaveChanges() {

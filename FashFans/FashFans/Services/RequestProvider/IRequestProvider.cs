@@ -15,5 +15,7 @@ namespace FashFans.Services.RequestProvider {
 
         Task<TResult> PostFormDataCollectionAsync<TResult, TBodyContent>(string url, TBodyContent attachedData, string accessToken = "")
             where TBodyContent : IEnumerable<MediaBase>;
+
+        Task<TResult> PostFormUrlEncodedAsync<TResult>(string uri, object bodyContent, string accessToken = "");
     }
 }

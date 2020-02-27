@@ -24,7 +24,9 @@ namespace FashFans.Services.Cart {
 
                ShoppingCartInfo shoppingCartInfo = null;
 
-               string url = BaseSingleton<GlobalSetting>.Instance.RestEndpoints.ShoppingEndPoints.ShoppingCartInfoEndPoint;
+               var userId = BaseSingleton<GlobalSetting>.Instance.UserProfile.Id;
+
+               string url = string.Format(BaseSingleton<GlobalSetting>.Instance.RestEndpoints.ShoppingEndPoints.ShoppingCartInfoEndPoint, userId);
 
                try {
                    shoppingCartInfo = await _requestProvider.GetAsync<ShoppingCartInfo>(url);

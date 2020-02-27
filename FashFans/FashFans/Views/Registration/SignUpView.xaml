@@ -9,6 +9,7 @@
     xmlns:extensions="clr-namespace:FashFans.Extensions"
     xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
     xmlns:viewBase="clr-namespace:FashFans.Views.Base"
     dependency:DependencyLocator.AutoWireViewModel="True"
     ios:Page.UseSafeArea="False">
@@ -16,11 +17,16 @@
     <viewBase:ContentPageBaseView.MainContent>
         <Grid BackgroundColor="Transparent">
             <ffimageloadingsvg:SvgCachedImage Aspect="AspectFill" Source="resource://FashFans.Resources.Images.im_background_signup.png" />
-            <controls:GradientBackground
-                EndColor="#FA4A6F"
-                MiddleColor="#EA6362"
-                Opacity="0.9"
-                StartColor="#FFA7E7" />
+
+            <magic:GradientView Opacity="0.9" VerticalOptions="FillAndExpand">
+                <magic:GradientView.GradientSource>
+                    <magic:LinearGradient Angle="45">
+                        <magic:GradientStop Offset="0" Color="#FFA7E7" />
+                        <magic:GradientStop Offset="0.5" Color="#EA6362" />
+                        <magic:GradientStop Offset="1" Color="#FA4A6F" />
+                    </magic:LinearGradient>
+                </magic:GradientView.GradientSource>
+            </magic:GradientView>
 
             <Grid
                 Grid.Row="0"
@@ -37,30 +43,6 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-
-
-                <!--  ADD PICTURE  -->
-                <!--<Grid
-                    Grid.Row="1"
-                    Margin="20,0"
-                    VerticalOptions="Center">
-                    <BoxView
-                        CornerRadius="30"
-                        HeightRequest="60"
-                        HorizontalOptions="Start"
-                        Opacity="0.75"
-                        VerticalOptions="Center"
-                        WidthRequest="60"
-                        Color="{StaticResource WhiteColor}" />
-
-                    <Label
-                        FontSize="{StaticResource LargeSize}"
-                        HorizontalOptions="Center"
-                        Text="Add Profile Pic"
-                        TextColor="{StaticResource WhiteColor}"
-                        TranslationX="-20"
-                        VerticalOptions="Center" />
-                </Grid>-->
 
                 <!--  FULL NAME  -->
                 <controls:ExtendedContentView
@@ -86,6 +68,7 @@
                         Text="{Binding FullName}"
                         TextColor="{StaticResource WhiteColor}" />
                 </controls:ExtendedContentView>
+
                 <!--  PASSWORD  -->
                 <controls:ExtendedContentView
                     Grid.Row="2"
@@ -111,6 +94,7 @@
                         Text="{Binding Password}"
                         TextColor="White" />
                 </controls:ExtendedContentView>
+
                 <!--  EMAIL  -->
                 <controls:ExtendedContentView
                     Grid.Row="3"
@@ -136,11 +120,11 @@
                         TextColor="White" />
                 </controls:ExtendedContentView>
 
+                <!--  SWITCH AGREE  -->
                 <StackLayout
                     Grid.Row="4"
                     Margin="20,10"
                     Orientation="Horizontal">
-
                     <Switch
                         HorizontalOptions="Start"
                         IsToggled="{Binding IsAgree}"
@@ -155,6 +139,7 @@
                         VerticalOptions="Center" />
                 </StackLayout>
 
+                <!--  SIGN UP  -->
                 <Button
                     Grid.Row="5"
                     Margin="20,0,20,60"
@@ -166,6 +151,7 @@
                     Text="Let's dive in"
                     TextColor="{StaticResource BlackColor}" />
 
+                <!--  LINE  -->
                 <BoxView
                     Grid.Row="6"
                     Margin="20,0"
@@ -173,6 +159,7 @@
                     VerticalOptions="Center"
                     Color="{StaticResource WhiteColor}" />
 
+                <!--  SIGN IN  -->
                 <Label
                     Grid.Row="7"
                     HorizontalOptions="Center"

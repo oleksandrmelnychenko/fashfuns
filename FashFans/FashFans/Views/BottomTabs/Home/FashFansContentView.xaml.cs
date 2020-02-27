@@ -7,5 +7,6 @@ namespace FashFans.Views.BottomTabs.Home {
         public FashFansContentView() {
             InitializeComponent();
         }
+
     }
 }

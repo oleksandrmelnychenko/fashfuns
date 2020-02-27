@@ -1,6 +1,8 @@
 ﻿using FashFans.Exceptions;
 using FashFans.Helpers;
+using FashFans.Models.Args.PayPal;
 using FashFans.Models.Medias;
+using FashFans.Models.PayPal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -73,7 +75,7 @@ namespace FashFans.Services.RequestProvider {
                 HttpContent content = null;
 
                 CheckInternetConnection();
-                SetAccesToken(accessToken);                
+                SetAccesToken(accessToken);
 
                 if (bodyContent != null) {
                     string jObject = JsonConvert.SerializeObject(bodyContent);
@@ -130,6 +132,54 @@ namespace FashFans.Services.RequestProvider {
                 return result;
             });
 
+        /// <summary>
+        /// POST application/x-www-form-urlencoded.
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>        
+        /// <param name="uri"></param>
+        /// <param name="bodyContent"></param>
+        /// <param name="accessToken"></param>
+        /// <returns></returns>
+        public async Task<TResult> PostFormUrlEncodedAsync<TResult>(string uri, object bodyContent, string accessToken = "") =>
+            await Task.Run(async () => {
+                TResult result = default(TResult);
+                HttpContent content = null;
+
+                CheckInternetConnection();
+                SetAccesToken(accessToken);
+                SetLanguage();
+
+                var keyValues = new List<KeyValuePair<string, string>>();
+                keyValues.Add(new KeyValuePair<string, string>("grant_type", "client_credentials"));
+                content = new FormUrlEncodedContent(keyValues);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+
+                if (bodyContent is PayPalAppCredentionals payPalAppCredentionals) {                   
+                    var byteArray = Encoding.ASCII.GetBytes($"{payPalAppCredentionals.UserName}:{payPalAppCredentionals.Password}");
+                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                }
+
+                HttpResponseMessage response = await _client.PostAsync(uri, content);
+
+                await HandleResponse(response);
+
+                string serialized = await response.Content.ReadAsStringAsync();
+
+                result = await DeserializeResponse<TResult>(serialized);
+
+                return result;
+            });
+
+
+        /// <summary>
+        /// POST form-data collection.
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <typeparam name="TBodyContent"></typeparam>
+        /// <param name="url"></param>
+        /// <param name="attachedData"></param>
+        /// <param name="accessToken"></param>
+        /// <returns></returns>
         public async Task<TResult> PostFormDataCollectionAsync<TResult, TBodyContent>(string url, TBodyContent attachedData, string accessToken = "")
             where TBodyContent : IEnumerable<MediaBase> =>
              await Task.Run(async () => {
@@ -236,7 +286,5 @@ namespace FashFans.Services.RequestProvider {
                 throw new HttpRequestExceptionEx(response.StatusCode, content);
             }
         }
-
-
     }
 }

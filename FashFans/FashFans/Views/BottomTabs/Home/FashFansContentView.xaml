@@ -45,9 +45,11 @@
                 </Label.FormattedText>
             </Label>
 
+
             <CollectionView
                 Grid.Row="1"
                 ItemsSource="{Binding Products}"
+                SelectedItem="{Binding SelectedProduct}"
                 SelectionMode="Single">
                 <CollectionView.Behaviors>
                     <behaviors:EventToCommandBehavior Command="{Binding SelectedCommand}" EventName="SelectionChanged" />

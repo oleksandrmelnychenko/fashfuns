@@ -8,6 +8,10 @@ using FashFans.Services.Dialog;
 using FashFans.Services.Identity;
 using FashFans.Services.Media;
 using FashFans.Services.Navigation;
+using FashFans.Services.OpenUrl;
+using FashFans.Services.PayPal;
+using FashFans.Services.Platform;
+using FashFans.Services.Platform.Contracts;
 using FashFans.Services.RequestProvider;
 using FashFans.ViewModels.ActionBars;
 using FashFans.ViewModels.BottomTabs.Categories;
@@ -69,12 +73,17 @@ namespace FashFans.ViewModels.Base {
 
             // Services.
             builder.RegisterType<CartService>().As<ICartService>();
+            builder.RegisterType<PayPalService>().As<IPayPalService>();
             builder.RegisterType<DialogService>().As<IDialogService>();
+            builder.RegisterType<OpenUrlService>().As<IOpenUrlService>();
             builder.RegisterType<IdentityService>().As<IIdentityService>();
             builder.RegisterType<RequestProvider>().As<IRequestProvider>().SingleInstance();
             builder.RegisterType<PickMediaService>().As<IPickMediaService>();
             builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
             builder.RegisterType<CancellationService>().As<ICancellationService>();
+
+            builder.RegisterType<CommonPayPalManager>().As<IPayPal>();
+            builder.RegisterType<NativePayPalManager>().As<IPayPalNative>();
 
             // Builders.
             builder.RegisterType<NavigationItemBuilder>().As<INavigationItemBuilder>();

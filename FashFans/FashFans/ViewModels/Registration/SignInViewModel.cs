@@ -1,8 +1,13 @@
 ﻿using FashFans.Exceptions;
 using FashFans.Helpers;
 using FashFans.Models.Args.Authentication;
+using FashFans.Models.Args.PayPal;
+using FashFans.Models.PayPal;
 using FashFans.Services.Cancrellation;
 using FashFans.Services.Identity;
+using FashFans.Services.PayPal;
+using FashFans.Services.Platform;
+using FashFans.Services.Platform.Contracts;
 using FashFans.ViewModels.Base;
 using Newtonsoft.Json;
 using System;
@@ -11,14 +16,21 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace FashFans.ViewModels.Registration {
     public sealed class SignInViewModel : ContentPageBaseViewModel {
 
+        private readonly ICancellationService _cancellationService;
+
         private readonly IIdentityService _identityService;
 
-        private readonly ICancellationService _cancellationService;
+        private readonly IPayPalService _payPalService;
+
+        private readonly IPayPalNative _payPalNative;
+
+        private readonly IPayPal _payPal;
 
         string _email;
         public string Email {
@@ -47,7 +59,16 @@ namespace FashFans.ViewModels.Registration {
         /// <summary>
         ///     ctor().
         /// </summary>
-        public SignInViewModel(IIdentityService identityService, ICancellationService cancellationService) {
+        public SignInViewModel(
+            IIdentityService identityService,
+            IPayPalService payPalService, 
+            IPayPalNative payPalNative,
+            IPayPal payPal,
+            ICancellationService cancellationService) {
+
+            _payPalService = payPalService;
+            _payPalNative = payPalNative;
+            _payPal = payPal;
             _identityService = identityService;
             _cancellationService = cancellationService;
         }
@@ -77,6 +98,7 @@ namespace FashFans.ViewModels.Registration {
 
                     if (signInResult) {
                         await NavigationService.InitializeAsync();
+                      
                         BaseSingleton<GlobalSetting>.Instance.UserProfile.IsAuth = IsRemember;
                         BaseSingleton<GlobalSetting>.Instance.UserProfile.SaveChanges();
                     } else {
@@ -84,11 +106,11 @@ namespace FashFans.ViewModels.Registration {
                     }
                 }
                 catch (HttpRequestExceptionEx ex) {
-                    var tt = JsonConvert.DeserializeObject<HttpRequestResultException>(ex.Message);
-                    Debug.WriteLine($"ERROR:{tt.Message}");
+                    var error = JsonConvert.DeserializeObject<HttpRequestResultException>(ex.Message);
+                    Debug.WriteLine($"ERROR:{error.Message}");
                     Debugger.Break();
                     SetBusy(busyKey, false);
-                    await DialogService.ShowAlertAsync(tt.Message, "ERROR", "OK");
+                    await DialogService.ShowAlertAsync(error.Message, "ERROR", "OK");
                 }
                 catch (Exception ex) {
                     SetBusy(busyKey, false);
@@ -96,11 +118,11 @@ namespace FashFans.ViewModels.Registration {
                     Debugger.Break();
                 }
                 SetBusy(busyKey, false);
-            } else {
+            } else {             
+               
                 await DialogService.ShowAlertAsync("Fields required", "Sign in info", "OK");
             }
-
-        }
+        }      
 
         private bool Valdate() {
             bool isValid = !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password);

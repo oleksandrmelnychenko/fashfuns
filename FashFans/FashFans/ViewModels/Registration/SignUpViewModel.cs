@@ -16,6 +16,10 @@ using Xamarin.Forms;
 namespace FashFans.ViewModels.Registration {
     public sealed class SignUpViewModel : ContentPageBaseViewModel {
 
+        private readonly IIdentityService _identityService;
+
+        private readonly ICancellationService _cancellationService;
+
         bool _isAgree;
         public bool IsAgree {
             get { return _isAgree; }
@@ -35,9 +39,6 @@ namespace FashFans.ViewModels.Registration {
         }
 
         string _email;
-        private readonly IIdentityService _identityService;
-        private readonly ICancellationService _cancellationService;
-
         public string Email {
             get { return _email; }
             set { SetProperty(ref _email, value); }

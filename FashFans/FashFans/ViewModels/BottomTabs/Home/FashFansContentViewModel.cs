@@ -20,12 +20,22 @@ namespace FashFans.ViewModels.BottomTabs.Home {
             set { SetProperty(ref _products, value); }
         }
 
-        public ICommand SelectedCommand => new Command(async (x) => {
-            if (x is SelectionChangedEventArgs item) {
-                if (item.CurrentSelection.FirstOrDefault() is Product product) {
-                    await NavigationService.NavigateToAsync<ProductItemViewModel>(product);
-                }
+        Product _selectedProduct;
+        public Product SelectedProduct {
+            get { return _selectedProduct; }
+            set {
+                SetProperty(ref _selectedProduct, value);
             }
+        }
+
+        public ICommand SelectedCommand => new Command((x) => {
+            
+            if (x is SelectionChangedEventArgs item) {
+                if (item.CurrentSelection.FirstOrDefault() is Product product) {                    
+                    NavigateToProductInfo(product);
+                    SelectedProduct = null; // after back command cleared selection.
+                }
+            }            
         });
 
         /// <summary>
@@ -40,10 +50,6 @@ namespace FashFans.ViewModels.BottomTabs.Home {
             ClearSource();
         }
 
-        private void ClearSource() {
-            Products?.Clear();
-        }
-
         public override Task InitializeAsync(object navigationData) {
 
             if (navigationData is SelectedContentArgs) {
@@ -52,6 +58,15 @@ namespace FashFans.ViewModels.BottomTabs.Home {
             }
 
             return base.InitializeAsync(navigationData);
+        }
+
+        private void ClearSource() {
+            Products?.Clear();
+            SelectedProduct = null; 
+        }
+
+        private async void NavigateToProductInfo(Product product) {
+            await NavigationService.NavigateToAsync<ProductItemViewModel>(product);
         }
 
         private void GetProducts() {
@@ -67,7 +82,7 @@ namespace FashFans.ViewModels.BottomTabs.Home {
                 },
                  new Product {
                     ImgSource = "resource://FashFans.Resources.Images.im_yellow_scirt.png",
-                    CategoryType = "Heand Bag",
+                    CategoryType = "Yellow scirt",
                     DesignerName = "Louis Vuitton",
                     Price = "899",
                     Rate = 4,
@@ -76,7 +91,7 @@ namespace FashFans.ViewModels.BottomTabs.Home {
                 },
                   new Product {
                     ImgSource = "resource://FashFans.Resources.Images.im_white_shirt.png",
-                    CategoryType = "Heand Bag",
+                    CategoryType = "White scirt",
                     DesignerName = "Louis Vuitton",
                     Price = "899",
                     Rate = 1,
@@ -85,7 +100,7 @@ namespace FashFans.ViewModels.BottomTabs.Home {
                 },
                    new Product {
                     ImgSource = "resource://FashFans.Resources.Images.im_smile.png",
-                    CategoryType = "Heand Bag",
+                    CategoryType = "Bag",
                     DesignerName = "Louis Vuitton",
                     Price = "899",
                     Rate = 3,

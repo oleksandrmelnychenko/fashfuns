@@ -12,9 +12,7 @@
             }
         }
 
-        public string ShoppingCartInfoEndPoint { get; private set; }
-
-      
+        public string ShoppingCartInfoEndPoint { get; private set; }      
 
         /// <summary>
         ///     ctor().

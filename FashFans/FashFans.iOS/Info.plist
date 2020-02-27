@@ -38,6 +38,14 @@
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>org-appextension-feature-password-management</string>
+      <string>com.paypal.ppclient.touch.v1</string>
+      <string>com.paypal.ppclient.touch.v2</string>
+    </array>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
     <key>UIAppFonts</key>
     <array>
       <string>Fonts/SFProDisplay-Light.ttf</string>
