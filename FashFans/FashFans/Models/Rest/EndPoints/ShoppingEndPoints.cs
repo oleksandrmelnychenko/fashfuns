@@ -3,6 +3,8 @@
 
         private const string SHOPPING_CART_API_KEY = "api/v1/products/get/shopping/cart/{0}";
 
+        private const string LIST_PRODUCTS_API_KEY = "api/v1/products/get";
+
         string _baseEndpoint;
         public string BaseEndpoint {
             get { return _baseEndpoint; }
@@ -12,7 +14,9 @@
             }
         }
 
-        public string ShoppingCartInfoEndPoint { get; private set; }      
+        public string ShoppingCartInfoEndPoint { get; private set; }
+
+        public string GetProductsEndPoint { get; private set; }
 
         /// <summary>
         ///     ctor().
@@ -24,6 +28,7 @@
 
         private void UpdateEndpoint(string baseEndpoint) {
             ShoppingCartInfoEndPoint = $"{baseEndpoint}/{SHOPPING_CART_API_KEY}";
+            GetProductsEndPoint = $"{baseEndpoint}/{LIST_PRODUCTS_API_KEY}";
         }
     }
 }

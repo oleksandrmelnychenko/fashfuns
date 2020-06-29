@@ -20,99 +20,140 @@
     </viewBase:ContentPageBaseView.ActionBar>
 
     <viewBase:ContentPageBaseView.MainContent>
-        <ScrollView>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="650" />
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
+        <!--<ScrollView>-->
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
+            <Label
+                FontSize="{StaticResource LargeSize}"
+                HorizontalOptions="Center"
+                Text="Summary"
+                TextColor="{StaticResource ExtraGrayColor}"
+                VerticalOptions="Center" />
+
+            <StackLayout Grid.Row="1">
                 <Label
-                    FontSize="{StaticResource LargeSize}"
-                    HorizontalOptions="Center"
-                    Text="Items in cart"
-                    TextColor="{StaticResource WhiteColor}"
+                    FontSize="{StaticResource SoftMediumSize}"
+                    HorizontalOptions="Start"
+                    Text="{Binding ShoppingCartInfo.ProductCount}"
+                    TextColor="{StaticResource ExtraGrayColor}"
                     VerticalOptions="Center" />
 
-                <CollectionView
-                    Grid.Row="1"
-                    ItemsSource="{Binding Products}"
-                    SelectionMode="Single">
-                    <CollectionView.Behaviors>
-                        <behaviors:EventToCommandBehavior Command="{Binding SelectedCommand}" EventName="SelectionChanged" />
-                    </CollectionView.Behaviors>
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="1" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="10" BackgroundColor="{StaticResource WhiteColor}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="200" />
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <ffimageloadingsvg:SvgCachedImage
-                                    Grid.Column="0"
-                                    Grid.RowSpan="4"
-                                    CacheType="Memory"
-                                    HeightRequest="200"
-                                    Source="{Binding ImgSource}" />
-                                <Label
-                                    Grid.Row="1"
-                                    Text="{Binding DesignerName}"
-                                    VerticalOptions="Center" />
-                                <Label
-                                    Grid.Row="2"
-                                    FontFamily="{StaticResource SFProSemiBold}"
-                                    Text="{Binding CategoryType}"
-                                    VerticalOptions="Center" />
-                                <Label
-                                    Grid.Row="3"
-                                    Text="{Binding Price, StringFormat='${0}'}"
-                                    VerticalOptions="Center" />
-                                <rate:RatingView
-                                    Grid.Row="4"
-                                    ColorOn="#FA4A6F"
-                                    Count="5"
-                                    HeightRequest="15"
-                                    Value="{Binding Rate}" />
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-
                 <Label
-                    Grid.Row="2"
-                    FontSize="{StaticResource LargeSize}"
-                    HorizontalOptions="Center"
-                    Text="Order Summary"
-                    TextColor="{StaticResource WhiteColor}"
+                    FontSize="{StaticResource SoftMediumSize}"
+                    HorizontalOptions="Start"
+                    Text="{Binding ShoppingCartInfo.TotalPrice}"
+                    TextColor="{StaticResource ExtraGrayColor}"
                     VerticalOptions="Center" />
 
-                <ContentView Grid.Row="3">
-                    <Grid>
-                        <ffimageloadingsvg:SvgCachedImage
-                            CacheType="Memory"
-                            HeightRequest="50"
-                            Source="resource://FashFans.Resources.Images.im_button.png" />
-                        <Label
-                            FontSize="{StaticResource LargeSize}"
-                            HorizontalOptions="Center"
-                            Text="Show all items"
-                            TextColor="{StaticResource WhiteColor}"
-                            VerticalOptions="Center" />
-                    </Grid>
-                </ContentView>
-            </Grid>
-        </ScrollView>
+                <Label
+                    FontSize="{StaticResource SoftMediumSize}"
+                    HorizontalOptions="Start"
+                    Text="{Binding ShoppingCartInfo.Shipping}"
+                    TextColor="{StaticResource ExtraGrayColor}"
+                    VerticalOptions="Center" />
+
+                <Label
+                    FontSize="{StaticResource SoftMediumSize}"
+                    HorizontalOptions="Start"
+                    Text="{Binding ShoppingCartInfo.OrderTotalPrice}"
+                    TextColor="{StaticResource ExtraGrayColor}"
+                    VerticalOptions="Center" />
+
+            </StackLayout>
+
+            <!--<Label
+                FontSize="{StaticResource LargeSize}"
+                HorizontalOptions="Center"
+                Text="Items in cart"
+                TextColor="{StaticResource ExtraGrayColor}"
+                VerticalOptions="Center" />
+
+            <CollectionView
+                Grid.Row="1"
+                BackgroundColor="Yellow"
+                HeightRequest="300"
+                ItemsSource="{Binding Products}"
+                SelectionMode="Single">
+                <CollectionView.Behaviors>
+                    <behaviors:EventToCommandBehavior Command="{Binding SelectedCommand}" EventName="SelectionChanged" />
+                </CollectionView.Behaviors>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="200" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <ffimageloadingsvg:SvgCachedImage
+                                Grid.RowSpan="4"
+                                Grid.Column="0"
+                                CacheType="Memory"
+                                HeightRequest="200"
+                                Source="{Binding ImageSource}" />
+                            <Label
+                                Grid.Row="1"
+                                Text="{Binding DesignerName}"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Row="2"
+                                FontFamily="{StaticResource SFProSemiBold}"
+                                Text="{Binding ProductCategory}"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Row="3"
+                                Text="{Binding Price, StringFormat='${0}'}"
+                                VerticalOptions="Center" />
+                            <rate:RatingView
+                                Grid.Row="4"
+                                ColorOn="#FA4A6F"
+                                Count="5"
+                                HeightRequest="15"
+                                Value="{Binding Rate}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+
+            <Label
+                Grid.Row="2"
+                FontSize="{StaticResource LargeSize}"
+                HorizontalOptions="Center"
+                Text="Order Summary"
+                TextColor="{StaticResource ExtraGrayColor}"
+                VerticalOptions="Center" />
+
+            <ContentView Grid.Row="3" VerticalOptions="End">
+                <Grid>
+                    <ffimageloadingsvg:SvgCachedImage
+                        CacheType="Memory"
+                        HeightRequest="50"
+                        Source="resource://FashFans.Resources.Images.im_button.png" />
+                    <Label
+                        FontSize="{StaticResource LargeSize}"
+                        HorizontalOptions="Center"
+                        Text="Show all items"
+                        TextColor="{StaticResource WhiteColor}"
+                        VerticalOptions="Center" />
+                </Grid>
+            </ContentView>
+        </Grid>
+
     </viewBase:ContentPageBaseView.MainContent>
 </viewBase:ContentPageBaseView>

@@ -72,7 +72,7 @@ namespace FashFans.ViewModels.Base {
             builder.RegisterType<ProductItemActionBarViewModel>();
 
             // Services.
-            builder.RegisterType<CartService>().As<ICartService>();
+            builder.RegisterType<ProductService>().As<IProductService>();
             builder.RegisterType<PayPalService>().As<IPayPalService>();
             builder.RegisterType<DialogService>().As<IDialogService>();
             builder.RegisterType<OpenUrlService>().As<IOpenUrlService>();

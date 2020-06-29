@@ -35,7 +35,7 @@ namespace FashFans.ViewModels.ActionBars {
         public override Task InitializeAsync(object navigationData) {
 
             if(navigationData is ShoppingCartInfo shoppingCartInfo) {
-                ProductCount = shoppingCartInfo.ItemTotal;
+                ProductCount = shoppingCartInfo.ProductCount;
             }
 
             IsBackButtonAvailable = NavigationService.IsBackButtonAvailable;

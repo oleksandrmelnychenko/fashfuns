@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,14 +9,14 @@ using FashFans.Models.Identities;
 using FashFans.Services.RequestProvider;
 
 namespace FashFans.Services.Cart {
-    public class CartService : ICartService {
+    public class ProductService : IProductService {
 
         private readonly IRequestProvider _requestProvider;
 
         /// <summary>
         ///     ctor().
         /// </summary>
-        public CartService(IRequestProvider requestProvider) {
+        public ProductService(IRequestProvider requestProvider) {
             _requestProvider = requestProvider;
         }
 
@@ -44,5 +45,32 @@ namespace FashFans.Services.Cart {
 
                return shoppingCartInfo;
            }, cancellationToken);
+
+        public async Task<List<Product>> GetProductsAsync(CancellationToken cancellationToken = default) =>
+             await Task.Run(async () => {
+
+                 List<Product> products = null;
+
+                 var userId = BaseSingleton<GlobalSetting>.Instance.UserProfile.Id;
+
+                 string url = BaseSingleton<GlobalSetting>.Instance.RestEndpoints.ShoppingEndPoints.GetProductsEndPoint;
+
+                 try {
+                     products = await _requestProvider.GetAsync<List<Product>>(url);
+                 }
+                 catch (ConnectivityException ex) {
+                     throw ex;
+                 }
+                 catch (HttpRequestExceptionEx ex) {
+                     throw ex;
+                 }
+                 catch (Exception ex) {
+                     Debug.WriteLine($"ERROR:{ex.Message}");
+                     Debugger.Break();
+                 }
+
+                 return products;
+             }, cancellationToken);
+
     }
 }

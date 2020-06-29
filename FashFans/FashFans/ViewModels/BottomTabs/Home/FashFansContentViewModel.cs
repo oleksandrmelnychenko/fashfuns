@@ -1,10 +1,15 @@
-﻿using FashFans.Models.Args.SelectedContent;
+﻿using FashFans.Exceptions;
+using FashFans.Extensions;
+using FashFans.Models.Args.SelectedContent;
 using FashFans.Models.Identities;
+using FashFans.Services.Cart;
 using FashFans.ViewModels.Base;
 using FashFans.ViewModels.MainContent;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +18,8 @@ using Xamarin.Forms;
 
 namespace FashFans.ViewModels.BottomTabs.Home {
     public sealed class FashFansContentViewModel : NestedViewModel {
+
+        private readonly IProductService _productService;
 
         ObservableCollection<Product> _products;
         public ObservableCollection<Product> Products {
@@ -29,19 +36,20 @@ namespace FashFans.ViewModels.BottomTabs.Home {
         }
 
         public ICommand SelectedCommand => new Command((x) => {
-            
+
             if (x is SelectionChangedEventArgs item) {
-                if (item.CurrentSelection.FirstOrDefault() is Product product) {                    
+                if (item.CurrentSelection.FirstOrDefault() is Product product) {
                     NavigateToProductInfo(product);
                     SelectedProduct = null; // after back command cleared selection.
                 }
-            }            
+            }
         });
 
         /// <summary>
         ///     ctor().
         /// </summary>
-        public FashFansContentViewModel() {
+        public FashFansContentViewModel(IProductService productService) {
+            _productService = productService;
             GetProducts();
         }
 
@@ -62,52 +70,35 @@ namespace FashFans.ViewModels.BottomTabs.Home {
 
         private void ClearSource() {
             Products?.Clear();
-            SelectedProduct = null; 
+            SelectedProduct = null;
         }
 
         private async void NavigateToProductInfo(Product product) {
             await NavigationService.NavigateToAsync<ProductItemViewModel>(product);
         }
 
-        private void GetProducts() {
-            Products = new ObservableCollection<Product> {
-                new Product {
-                    ImgSource = "resource://FashFans.Resources.Images.im_skeleton_hand.png",
-                    CategoryType = "Heand Bag",
-                    DesignerName = "Louis Vuitton",
-                    Price = "899",
-                    Rate = 2,
-                    Description = "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat… ",
-                    Id = 1
-                },
-                 new Product {
-                    ImgSource = "resource://FashFans.Resources.Images.im_yellow_scirt.png",
-                    CategoryType = "Yellow scirt",
-                    DesignerName = "Louis Vuitton",
-                    Price = "899",
-                    Rate = 4,
-                    Description = "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat… ",
-                    Id = 2
-                },
-                  new Product {
-                    ImgSource = "resource://FashFans.Resources.Images.im_white_shirt.png",
-                    CategoryType = "White scirt",
-                    DesignerName = "Louis Vuitton",
-                    Price = "899",
-                    Rate = 1,
-                    Description = "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat… ",
-                    Id = 3
-                },
-                   new Product {
-                    ImgSource = "resource://FashFans.Resources.Images.im_smile.png",
-                    CategoryType = "Bag",
-                    DesignerName = "Louis Vuitton",
-                    Price = "899",
-                    Rate = 3,
-                    Description = "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat… ",
-                    Id = 4
-                },
-            };
+        private async void GetProducts() {
+            IsBusy = true;
+
+            try {
+                var allProducts = await _productService.GetProductsAsync();
+
+                Products = allProducts.ToObservableCollection();
+            }
+            catch (HttpRequestExceptionEx ex) {
+                var error = JsonConvert.DeserializeObject<HttpRequestResultException>(ex.Message);
+                Debug.WriteLine($"ERROR:{error.Message}");
+                Debugger.Break();
+                IsBusy = false;
+                await DialogService.ShowAlertAsync(error.Message, "ERROR", "OK");
+            }
+            catch (Exception ex) {
+                IsBusy = false;
+                Debug.WriteLine($"ERROR:{ex.Message}");
+                Debugger.Break();
+            }
+
+            IsBusy = false;
         }
     }
 }

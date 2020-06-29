@@ -22,7 +22,7 @@
                 FontSize="28"
                 HorizontalOptions="Center"
                 Text="My cart"
-                TextColor="{StaticResource LightGrayColor}"
+                TextColor="{StaticResource ExtraGrayColor}"
                 VerticalOptions="Center" />
         </ContentView>
 

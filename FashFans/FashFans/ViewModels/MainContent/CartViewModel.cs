@@ -14,7 +14,14 @@ using Xamarin.Forms;
 namespace FashFans.ViewModels.MainContent {
     public sealed class CartViewModel : ContentPageBaseViewModel {
 
-        private readonly ICartService _cartService;
+        private readonly IProductService _cartService;
+
+        ShoppingCartInfo _shoppingCartInfo;
+        public ShoppingCartInfo ShoppingCartInfo {
+            get { return _shoppingCartInfo; }
+            set { _shoppingCartInfo = value; }
+        }
+
 
         ObservableCollection<Product> _products;
         public ObservableCollection<Product> Products {
@@ -23,9 +30,9 @@ namespace FashFans.ViewModels.MainContent {
         }
 
         public ICommand SelectedCommand => new Command((x) => {
-            if(x is SelectionChangedEventArgs item) {
-                if(item.CurrentSelection.FirstOrDefault() is Product product) {
-                    
+            if (x is SelectionChangedEventArgs item) {
+                if (item.CurrentSelection.FirstOrDefault() is Product product) {
+
                 }
             }
         });
@@ -33,7 +40,7 @@ namespace FashFans.ViewModels.MainContent {
         /// <summary>
         ///     ctor().
         /// </summary>
-        public CartViewModel(ICartService cartService) {
+        public CartViewModel(IProductService cartService) {
             ActionBarViewModel = DependencyLocator.Resolve<CartActionBarViewModel>();
             ((CartActionBarViewModel)ActionBarViewModel).InitializeAsync(this);
 
@@ -41,7 +48,6 @@ namespace FashFans.ViewModels.MainContent {
         }
 
         public override Task InitializeAsync(object navigationData) {
-
             GetCart();
 
             return base.InitializeAsync(navigationData);
@@ -49,8 +55,8 @@ namespace FashFans.ViewModels.MainContent {
 
         private async void GetCart() {
             var shoppingCartInfo = await _cartService.GetShoppingCartInfoAsync();
-            if(shoppingCartInfo != null) {
-                
+            if (shoppingCartInfo != null) {
+                ShoppingCartInfo = shoppingCartInfo;
             }
         }
     }

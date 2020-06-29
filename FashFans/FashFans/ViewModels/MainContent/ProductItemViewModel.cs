@@ -13,7 +13,7 @@ using Xamarin.Forms;
 namespace FashFans.ViewModels.MainContent {
     public sealed class ProductItemViewModel : ContentPageBaseViewModel {
 
-        private readonly ICartService _cartService;
+        private readonly IProductService _cartService;
 
         Product _product;
         public Product Product {
@@ -42,7 +42,7 @@ namespace FashFans.ViewModels.MainContent {
         /// <summary>
         ///     ctor().
         /// </summary>
-        public ProductItemViewModel(ICartService cartService) {
+        public ProductItemViewModel(IProductService cartService) {
             ActionBarViewModel = DependencyLocator.Resolve<ProductItemActionBarViewModel>();
             ((ProductItemActionBarViewModel)ActionBarViewModel).InitializeAsync(this);
 
@@ -52,15 +52,13 @@ namespace FashFans.ViewModels.MainContent {
             GetSecondTemps();
         }
 
-
-
         public override void Dispose() {
             base.Dispose();
         }
 
         public override Task InitializeAsync(object navigationData) {
 
-            if(navigationData is Product product) {
+            if (navigationData is Product product) {
                 Product = product;
             }
 
@@ -71,19 +69,13 @@ namespace FashFans.ViewModels.MainContent {
 
         private async void GetCart() {
             var shoppingCartInfo = await _cartService.GetShoppingCartInfoAsync();
-            if(shoppingCartInfo != null) {
+            if (shoppingCartInfo != null) {
                 await ((ProductItemActionBarViewModel)ActionBarViewModel).InitializeAsync(shoppingCartInfo);
             }
         }
 
         private void GetTemps() {
             Temps = new ObservableCollection<ITemp> {
-                new Temp {
-                    ImgUrl = "resource://FashFans.Resources.Images.im_armani.png"
-                },
-                new Temp {
-                    ImgUrl = "resource://FashFans.Resources.Images.im_armani.png"
-                },
                 new Temp {
                     ImgUrl = "resource://FashFans.Resources.Images.im_armani.png"
                 },

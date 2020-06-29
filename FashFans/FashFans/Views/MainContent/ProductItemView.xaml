@@ -38,7 +38,7 @@
                         Aspect="AspectFill"
                         BackgroundColor="{StaticResource WhiteColor}"
                         CacheType="Memory"
-                        Source="{Binding Product.ImgSource}" />
+                        Source="{Binding Product.ImageSource}" />
 
                     <Grid
                         Grid.Row="1"
@@ -47,7 +47,7 @@
 
                         <Label
                             FontSize="{StaticResource BigSize}"
-                            Text="{Binding Product.CategoryType}"
+                            Text="{Binding Product.ProductCategory.Category}"
                             TextColor="{StaticResource BlackColor}"
                             VerticalOptions="Center" />
 
@@ -157,7 +157,7 @@
                                         FontFamily="{StaticResource SFProThin}"
                                         FontSize="{StaticResource BigSize}"
                                         HeightRequest="58"
-                                        Text="{Binding LikeCount, StringFormat=' +{0}'}"
+                                        Text="{Binding LikeCount}"
                                         TextColor="DeepPink"
                                         TranslationX="-45"
                                         WidthRequest="58" />
