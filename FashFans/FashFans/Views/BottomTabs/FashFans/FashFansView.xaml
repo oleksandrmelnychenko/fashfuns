@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Grid>
+        <!--Title-->
         <Label
             HorizontalOptions="Center"
             Text="FashFans view"
